@@ -11,38 +11,42 @@ package tareasw2;
  */
 public class Cuenta {
        
-    private String type;
-       private String accountNumber;
-       private int amount;
-       public Cuenta(String type,String accountNumber,int amount)
+       private String tipo;
+       private String numeroCuenta;
+       private int monto;
+       public Cuenta(String tipo,String numeroCuenta,int monto)
        {
-              this.amount=amount;
-              this.type=type;
-              this.accountNumber=accountNumber;
+              this.monto=monto;
+              this.tipo=tipo;
+              this.numeroCuenta=numeroCuenta;
        }
-       public void debit(int debit) throws Exception
+       public void debito(int debito) throws Exception
        {
-              if(amount <= 500)
+              if(cuentaDebajoDe())
               {
-                     throw new Exception("Mininum balance shuold be over 500");
+                     throw new Exception("Balance mínimo debe ser de 500");
               }
-              amount = amount-debit;
-              System.out.println("Now amount is" + amount);
+              monto = monto-debito;
+              System.out.println("El monto actual es " + monto);
        }
-       public void transfer(Cuenta from,Cuenta to,int cerditAmount) throws Exception
+       public void transferencia(Cuenta from,Cuenta to,int montoEnviado) throws Exception
        {
-              if(from.amount <= 500)
+              if(from.cuentaDebajoDe())
               {
-                     throw new Exception("Mininum balance shuold be over 500");
+                     throw new Exception("Balance mínimo debe ser 500");
               }
-              to.amount = amount+cerditAmount;
+              to.monto = monto+montoEnviado;
        }
        public void sendWarningMessage()
        {
-              if(amount <= 500)
+              if(cuentaDebajoDe())
               {
-                     System.out.println("amount should be over 500");
+                     System.out.println("El monto debe ser mayor a 500");
               }
+       }
+       
+         private boolean cuentaDebajoDe(){
+             return monto<=500;
        }
 
 }
